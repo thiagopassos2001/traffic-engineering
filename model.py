@@ -39,12 +39,26 @@ def WebsterMethod(Tp,yi):
     Referência: 6.9.2 Método de Webster - Manual Brasileiro de Sinalização de Trânsito (Volume V)
     """
 
-    to = ((1.5 * Tp) + 5)/(1 - sum(yi))
+    t = ((1.5 * Tp) + 5)/(1 - sum(yi))
 
-    return to
+    return t
+
+def EffectiveGreenTime(tc,Tp,yi):
+    """
+    .
+    """
+
+    teg = tc-Tp
+    syi = sum(yi)
+    t = [teg*(i/syi) for i in yi]
+
+    return t
 
 if __name__=="__main__":
     Tp = 2*InterGreensVeicularSignalTime(15+5+5,speed=40)
-    yi = [i/1800 for i in [550,550,200,200]]
+    D = [900,600]
+    C = [1800,3600]
+    yi = [1*i/j for i,j in zip(D,C)]
+    tc = WebsterMethod(Tp,yi)
 
-    print(WebsterMethod(Tp,yi))
+    print(tc,EffectiveGreenTime(tc,Tp,yi))
