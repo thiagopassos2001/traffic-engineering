@@ -55,10 +55,16 @@ def EffectiveGreenTime(tc,Tp,yi):
     return t
 
 if __name__=="__main__":
-    Tp = 2*InterGreensVeicularSignalTime(15+5+5,speed=40)
-    D = [900,600]
-    C = [1800,3600]
-    yi = [1*i/j for i,j in zip(D,C)]
+    Tp = 3*InterGreensVeicularSignalTime(14+5+5,speed=40)
+    D = [100,300,300]
+    C = [1800,1800,1800]
+    # D = [500,500,175,175]
+    # C = [1800,1800,1800,1800]
+    yi = [1.192*i/j for i,j in zip(D,C)]
     tc = WebsterMethod(Tp,yi)
-
     print(tc,EffectiveGreenTime(tc,Tp,yi))
+
+    print(RedClearanceVeicularSignaTime(30,speed=40))
+
+    # result = YellowVeicularSignalTime(speed=80)
+    # print(result)
